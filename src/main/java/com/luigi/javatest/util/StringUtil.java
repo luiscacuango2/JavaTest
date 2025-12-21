@@ -2,6 +2,10 @@ package com.luigi.javatest.util;
 
 public class StringUtil {
 
+    public static boolean isEmpty(String str) {
+        return str == null || str.trim().length() <= 0;
+    }
+
     public static String repeat(String str, int times) {
 
         if (times < 0) {
