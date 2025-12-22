@@ -31,6 +31,19 @@ Para contribuir con código, sigue este flujo de trabajo:
     * Asegúrate de que todos los tests pasen ejecutando `mvn test`.
 4.  **Commits:** Usa mensajes descriptivos (preferiblemente siguiendo [Conventional Commits](https://www.conventionalcommits.org/)).
 
+## Commit Messages
+
+Utilizamos [Conventional Commits](https://www.conventionalcommits.org/):
+
+*   `feat`: Una nueva funcionalidad.
+*   `fix`: Corrección de un bug.
+*   `docs`: Cambios en la documentación.
+*   `style`: Cambios que no afectan el significado del código (espacios, formato, etc).
+*   `refactor`: Cambio de código que no corrige un bug ni añade una funcionalidad.
+*   `test`: Añadir o corregir tests.
+
+Ejemplo: `feat: agregar endpoint para probar pagos`
+
 ---
 
 ### **Requisitos de Pull Request (PR)**
