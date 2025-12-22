@@ -45,7 +45,7 @@ El proyecto implementa **TDD (Test Driven Development)** y asegura la calidad me
     mvn test           # Ejecutar suite de pruebas unitarias
     ```
 3. **Ejecutar la aplicación**
-    ```
+    ```bash
     java -jar target/javatest-1.0-SNAPSHOT.jar
     ```
 > **Nota técnica (Java 25):** Para evitar advertencias de carga dinámica durante los tests, el proyecto está configurado para habilitar `-XX:+EnableDynamicAgentLoading` en el entorno de pruebas.
@@ -87,15 +87,15 @@ javatest/
 
 1. **Haz un Fork** del proyecto.
 2. **Crea tu rama de características**:
-   ```
+   ```bash
    git checkout -b feature/CaracteristicaAsombrosa
    ```
 3. **Haz Commit de tus cambios**:
-   ```
+   ```bash
    git commit -m 'Se añade una característica sorprendente'
    ```
 4. **Haz Push a la rama:**
-   ```
+   ```bash
    git push origin feature/CaracteristicaAsombrosa
    ```
 5. **Abre un Pull Request**
