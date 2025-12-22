@@ -103,6 +103,6 @@ javatest/
 ### **Contribuciones**
 ¡Las contribuciones son bienvenidas! Por favor, abre un issue o un pull request para sugerir mejoras o reportar problemas.
 ### **Licencia**
-Este proyecto está bajo la licencia MIT. Consulta el archivo `LICENSE` para más detalles.
+Este proyecto está bajo la licencia MIT. Consulta el archivo [Licencia MIT](LICENSE) para más detalles.
 ### **Contacto**
-Para preguntas o soporte, por favor contacta a [Luis Cacuango](mailto:luiscacuango2084@gmail.com).
+Para preguntas o soporte, por favor contacta a **Luis Cacuango** - [luiscacuango2084@gmail.com](mailto:luiscacuango2084@gmail.com).
