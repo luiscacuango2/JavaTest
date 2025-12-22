@@ -36,7 +36,7 @@ El proyecto implementa **TDD (Test Driven Development)** y asegura la calidad me
 
 1. **Clonar y navegar:**
    ```bash
-   git clone <url-del-repositorio>
+   git clone https://github.com/luiscacuango2/JavaTest.git
    cd javatest
     ```
 2. **Ciclo de vida de Maven:**
