@@ -1,9 +1,11 @@
 package com.luigi.javatest.util;
 
-import org.junit.Test;
+// Cambiamos org.junit.Test por el de JUnit 5
+import org.junit.jupiter.api.Test;
 
 import static com.luigi.javatest.util.PasswordUtil.SecurityLevel.*;
-import static org.junit.Assert.*;
+// Cambiamos org.junit.Assert por el de JUnit 5
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PasswordUtilTest {
 

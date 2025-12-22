@@ -3,21 +3,19 @@ package com.luigi.javatest.util;
 public class StringUtil {
 
     public static boolean isEmpty(String str) {
-        return str == null || str.trim().length() <= 0;
+        // Un String es vacío si es nulo o si al quitar espacios su longitud es 0
+        return str == null || str.trim().length() == 0;
     }
 
     public static String repeat(String str, int times) {
-
         if (times < 0) {
-            throw new IllegalArgumentException("tiempos negativos no permitidos");
+            throw new IllegalArgumentException("El número de repeticiones no puede ser negativo");
         }
 
-        String result = "";
-
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < times; i++) {
-            result += str;
+            result.append(str);
         }
-
-        return result;
+        return result.toString();
     }
 }

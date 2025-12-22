@@ -11,10 +11,6 @@ public class PaymentProcessor {
     public boolean makePayment(double amount) {
 
         PaymentResponse response = paymentGateway.requestPayment(new PaymentsRequest(amount));
-        if (response.getStatus() == PaymentResponse.PaymentStatus.OK) {
-            return true;
-        }  else {
-            return false;
-        }
+        return response.getStatus() == PaymentResponse.PaymentStatus.OK;
     }
 }

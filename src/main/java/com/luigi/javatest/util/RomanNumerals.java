@@ -1,65 +1,39 @@
 package com.luigi.javatest.util;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class RomanNumerals {
-    private static final List<String> startRomanNumbers = new ArrayList<>();
-    private static final List<String> middleRomanNumbers = new ArrayList<>();
+    private static final Map<Integer, String> ROMAN_MAP = new LinkedHashMap<>();
 
-    public RomanNumerals(){
-        // números menores a 3 en tipificación de longitud
-        startRomanNumbers.add("I"); // unidad
-        startRomanNumbers.add("X"); // decena
-        startRomanNumbers.add("C"); // centena
-        startRomanNumbers.add("M"); // miles
-        // números de 5 en longitud
-        middleRomanNumbers.add("V"); // unidad
-        middleRomanNumbers.add("L"); // decena
-        middleRomanNumbers.add("D"); // centena
-        middleRomanNumbers.add("V+"); // miles
+    static {
+        ROMAN_MAP.put(1000, "M");
+        ROMAN_MAP.put(900, "CM");
+        ROMAN_MAP.put(500, "D");
+        ROMAN_MAP.put(400, "CD");
+        ROMAN_MAP.put(100, "C");
+        ROMAN_MAP.put(90, "XC");
+        ROMAN_MAP.put(50, "L");
+        ROMAN_MAP.put(40, "XL");
+        ROMAN_MAP.put(10, "X");
+        ROMAN_MAP.put(9, "IX");
+        ROMAN_MAP.put(5, "V");
+        ROMAN_MAP.put(4, "IV");
+        ROMAN_MAP.put(1, "I");
     }
 
-    public static String repeatCharacterNTimes(String character, int times){
-        StringBuilder newCharacter = new StringBuilder();
-        for (int i = 0; i < times; i++) {
-            newCharacter.append(character);
-        }
-        return newCharacter.toString();
-    }
-
-    public static String getNumber(int number, int position){
-        if(number <= 3 && number > 0){
-            return repeatCharacterNTimes(startRomanNumbers.get(position), number);
-        }
-        if(number == 4){
-            return startRomanNumbers.get(position) + middleRomanNumbers.get(position);
-        }
-        if(number == 5){
-            return middleRomanNumbers.get(position);
-        }
-        if(number <= 8 && number > 0){
-            int numberLessThanFive = number - 5;
-            return middleRomanNumbers.get(position) + repeatCharacterNTimes(startRomanNumbers.get(position), numberLessThanFive);
-        }
-        if(number == 9){
-            return startRomanNumbers.get(position) + startRomanNumbers.get(position+1);
-        }
-
-        return "";
-    }
-    public static String arabicToRoman(int number) {
-        String[] parts = String.valueOf(number).split("");
-        if(number >= 10000 || number < 0){
+    public String arabicToRoman(int n) {
+        if (n <= 0 || n > 3999) {
             return "Error cantidad";
         }
-        StringBuilder romanNumber = new StringBuilder();
-        int counter = (parts.length-1);
-        for (int i = 0; i < parts.length; i++) {
-            int num = Integer.parseInt(parts[i]);
-            romanNumber.append(getNumber(num, counter));
-            counter--;
+
+        StringBuilder result = new StringBuilder();
+        for (Map.Entry<Integer, String> entry : ROMAN_MAP.entrySet()) {
+            while (n >= entry.getKey()) {
+                result.append(entry.getValue());
+                n -= entry.getKey();
+            }
         }
-        return romanNumber.toString();
+        return result.toString();
     }
 }

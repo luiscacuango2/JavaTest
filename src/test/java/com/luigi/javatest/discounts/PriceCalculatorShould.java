@@ -1,16 +1,15 @@
 package com.luigi.javatest.discounts;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.hamcrest.CoreMatchers.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class PriceCalculatorShould {
 
     @Test
     public void total_zero_when_there_are_prices() {
         PriceCalculator calculator = new PriceCalculator();
-        assertThat(calculator.getTotal(), is(0.0));
+        assertEquals(0.0, calculator.getTotal(), 0.001);
     }
 
     @Test
@@ -18,7 +17,8 @@ public class PriceCalculatorShould {
         PriceCalculator calculator = new PriceCalculator();
         calculator.addPrice(10.2);
         calculator.addPrice(15.5);
-        assertThat(calculator.getTotal(), is(25.7));
+        // Usamos delta 0.001 para manejar precisión de decimales
+        assertEquals(25.7, calculator.getTotal(), 0.001);
     }
 
     @Test
@@ -27,8 +27,10 @@ public class PriceCalculatorShould {
         calculator.addPrice(100);
         calculator.addPrice(50);
         calculator.addPrice(50);
-        calculator.setDiscount(25);
-        assertThat(calculator.getTotal(), is(150.0));
+        calculator.setDiscount(25.0); // 25% de descuento
+
+        // Total (200) - 25% (50) = 150
+        assertEquals(150.0, calculator.getTotal(), 0.001);
     }
 
 }

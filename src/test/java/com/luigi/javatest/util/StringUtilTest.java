@@ -1,9 +1,8 @@
 package com.luigi.javatest.util;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.DisplayName;
-
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class StringUtilTest {
 
@@ -46,9 +45,11 @@ public class StringUtilTest {
         assertEquals("", StringUtil.repeat("hola", 0));
     }
 
-    @Test(expected=IllegalArgumentException.class)
+    @Test
     public void repeat_string_negative_times() {
-        StringUtil.repeat("hola", -1);
+        // En JUnit 5 se usa assertThrows para capturar la excepción
+        assertThrows(IllegalArgumentException.class, () -> {
+            StringUtil.repeat("hola", -1);
+        });
     }
-
 }
