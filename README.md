@@ -100,9 +100,11 @@ javatest/
    ```
 5. **Abre un Pull Request**
 
-### **Contribuciones**
-¡Las contribuciones son bienvenidas! Por favor, abre un issue o un pull request para sugerir mejoras o reportar problemas.
+### **🤝 Contribución**
+¡Las contribuciones son bienvenidas! Por favor, lee nuestro archivo [CONTRIBUTING.md](CONTRIBUTING.md) para conocer los detalles sobre nuestro código de conducta y el proceso para enviarnos pull requests.
+
 ### **Licencia**
 Este proyecto está bajo la licencia MIT. Consulta el archivo [Licencia MIT](LICENSE) para más detalles.
+
 ### **Contacto**
 Para preguntas o soporte, por favor contacta a **Luis Cacuango** - [luiscacuango2084@gmail.com](mailto:luiscacuango2084@gmail.com).
