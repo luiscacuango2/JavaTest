@@ -57,7 +57,7 @@ public class MovieServiceShould {
         assertEquals(Arrays.asList(2, 3, 4, 5, 6), getMoviesIds(movies));
     }
 
-    private static List<Integer> getMoviesIds(Collection<Movie> movies) {
+    public static List<Integer> getMoviesIds(Collection<Movie> movies) {
         return movies.stream()
                 .map(Movie::getId)
                 .collect(Collectors.toList());
