@@ -4,12 +4,20 @@
 ![Maven](https://img.shields.io/badge/Apache%20Maven-3.8.7%2B-C71A36?style=for-the-badge&logo=apache-maven&logoColor=white)
 ![JUnit 5](https://img.shields.io/badge/JUnit-5.12.2-25A162?style=for-the-badge&logo=junit5&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)
-
+![Mockito](https://img.shields.io/badge/Mockito-5.20.0-6bba46?style=for-the-badge&logo=mockito&logoColor=white)
+![H2](https://img.shields.io/badge/H2_Database-004B8D?style=for-the-badge&logo=sqlite&logoColor=white)
+![Spring](https://img.shields.io/badge/Spring_JDBC-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
 ## **Descripción**
 Este repositorio es un ecosistema de aprendizaje y desarrollo en Java. Contiene implementaciones de algoritmos clásicos, gestión de lógica de negocio y pruebas de integración, sirviendo como base sólida para despliegue de componentes escalables.
 
 ---
+### Funcionalidades Principales
+- ✅ **Búsqueda Inteligente:** Filtro de películas por nombre (parcial y case-insensitive).
+- ✅ **Gestión de Catálogo:** Búsqueda avanzada por género y director.
+- ✅ **Persistencia Robusta:** Repositorio implementado con `JdbcTemplate` y soporte para bases de datos SQL.
+- ✅ **Calidad de Código:** Cobertura de pruebas unitarias con Mockito e integración con base de datos H2.
 
+---
 ### **Utilidades y Cobertura de Tests**
 
 El proyecto implementa **TDD (Test Driven Development)** y asegura la calidad mediante los siguientes módulos:
@@ -23,7 +31,18 @@ El proyecto implementa **TDD (Test Driven Development)** y asegura la calidad me
 | **Algoritmos Clásicos** | `FizzBuzz` | Divisibilidad múltiple y lógica condicional. | JUnit 5 |
 | **Cálculo de Precios** | `PriceCalculator` | Acumulación y descuentos porcentuales. | JUnit 5 |
 | **Lógica de Strings** | `StringUtil` | Manipulación, repetición y manejo de `null`. | JUnit 5 |
+| **Buscador de Cine** | `MovieService` | Filtrado por nombre, género y director. | Mockito |
+| **Persistencia SQL** | `MovieRepository` | Pruebas de integración con scripts H2. | Spring JDBC |
+| **Seguridad** | `PasswordUtil` | Niveles de seguridad y longitud de claves. | JUnit 5 |
+---
 
+### **Estrategia de Testing**
+
+Para asegurar la robustez del sistema, empleamos una **pirámide de pruebas** equilibrada:
+
+1.  **Unit Tests (JUnit 5):** Validamos la lógica pura de algoritmos y utilidades en aislamiento total.
+2.  **Doubles & Mocks (Mockito):** Aislamos las dependencias externas (servicios, repositorios) para probar el comportamiento de la capa de negocio sin efectos colaterales.
+3.  **Integration Tests (H2 Database):** Verificamos la comunicación real con la base de datos, ejecutando scripts SQL (`test-data.sql`) en entornos de memoria controlados.
 ---
 
 ### **Stack Técnico**
@@ -60,7 +79,7 @@ javatest/
 ```
 ### **Dependencias**
 
-- **org.mockito:mockito-core:5.21.0** (scope: `test`)  
+- **org.mockito:mockito-core:5.20.0** (scope: `test`)  
   Biblioteca para crear mocks y stubs en pruebas. En este `pom.xml` además se referencia como `-javaagent` en la configuración de `maven-surefire-plugin` (revisa la ruta si hay problemas).
 
 - **org.junit.jupiter:junit-jupiter:5.12.2** (scope: `test`)  
@@ -100,7 +119,7 @@ javatest/
    ```
 5. **Abre un Pull Request**
 
-### **🤝 Contribución**
+### **Contribución**
 ¡Las contribuciones son bienvenidas! Por favor, lee nuestro archivo [CONTRIBUTING.md](CONTRIBUTING.md) para conocer los detalles sobre nuestro código de conducta y el proceso para enviarnos pull requests.
 
 ### **Licencia**
