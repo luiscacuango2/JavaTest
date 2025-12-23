@@ -22,8 +22,7 @@ jobs:
 
       - name: Build and Test with Maven
         # Usamos 'verify' para asegurar que corran Unit + Integration tests
-        # Agregamos los flags necesarios para Mockito en Java 25
-        run: mvn -B clean verify -DargLine="-XX:+EnableDynamicAgentLoading -Xshare:off"
+        run: mvn -B clean verify
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
