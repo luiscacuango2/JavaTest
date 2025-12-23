@@ -1,7 +1,7 @@
 # **javatest**
 
 ![Java](https://img.shields.io/badge/Java-25%2B-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
-![Maven](https://img.shields.io/badge/Apache%20Maven-3.8.7%2B-C71A36?style=for-the-badge&logo=apache-maven&logoColor=white)
+![Maven](https://img.shields.io/badge/Apache%20Maven-3.2.5-C71A36?style=for-the-badge&logo=apache-maven&logoColor=white)
 ![JUnit 5](https://img.shields.io/badge/JUnit-5.12.2-25A162?style=for-the-badge&logo=junit5&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)
 ![Mockito](https://img.shields.io/badge/Mockito-5.20.0-6bba46?style=for-the-badge&logo=mockito&logoColor=white)
