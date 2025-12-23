@@ -1,26 +1,25 @@
 package com.luigi.javatest.movies.data;
 
+import com.luigi.javatest.movies.model.Gender;
 import com.luigi.javatest.movies.model.Movie;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.jdbc.datasource.init.ResourceDatabasePopulator;
-import org.springframework.jdbc.datasource.init.ScriptUtils;
-import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static com.luigi.javatest.movies.service.MovieServiceShould.getMoviesIds;
 import static org.junit.jupiter.api.Assertions.*;
 
 public class MovieRepositoryIntegrationTest {
     private MovieRepositoryJdbc movieRepository;
-    private DriverManagerDataSource dataSource;
+    private static DriverManagerDataSource dataSource;
 
     @BeforeEach
     void setUp() {
@@ -33,8 +32,8 @@ public class MovieRepositoryIntegrationTest {
         dataSource.setPassword("sa");
 
         // 2. Cargamos el script
-            ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
-            populator.addScript(new ClassPathResource("sql-scripts/test-data.sql"));
+        ResourceDatabasePopulator populator = new ResourceDatabasePopulator();
+        populator.addScript(new ClassPathResource("sql-scripts/test-data.sql"));
 
         // 3. Ejecutamos el populator sobre el datasource
         populator.execute(dataSource);
@@ -54,5 +53,36 @@ public class MovieRepositoryIntegrationTest {
         assertEquals(Arrays.asList(1, 2, 3), moviesIds);
     }
 
+    @Test
+    public void load_movie_by_id() {
+        // Ejecutar
+        Movie movie = movieRepository.findById(2);
 
+        // Validar
+        assertEquals(2, movie.getId());
+        assertEquals("Memento", movie.getName());
+    }
+
+    @Test
+    public void insert_a_movie() {
+        // Preparar
+        Movie movie = new Movie(null, "Super 8", 112, Gender.THRILLER);
+
+        // Ejecutar
+        movieRepository.saveOrUpdate(movie);
+
+        // Validar
+        Movie movieFromDb = movieRepository.findById(4);
+        assertEquals(4, movieFromDb.getId());
+        assertEquals("Super 8", movieFromDb.getName());
+    }
+
+    @AfterAll
+    public static void tearDown() throws Exception { // Añadido 'static'
+        if (dataSource != null) {
+            try (Statement s = dataSource.getConnection().createStatement()) {
+                s.execute("DROP ALL OBJECTS DELETE FILES");
+            }
+        }
+    }
 }

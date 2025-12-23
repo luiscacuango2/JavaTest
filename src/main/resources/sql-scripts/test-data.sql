@@ -5,6 +5,8 @@ CREATE TABLE IF NOT EXISTS movies (
     gender VARCHAR(50) NOT NULL
     );
 
+TRUNCATE TABLE movies;
+
 INSERT INTO movies (name, minutes, gender) VALUES
     ('Dark Knight', 152, 'ACTION'),
     ('Memento', 113, 'THRILLER'),

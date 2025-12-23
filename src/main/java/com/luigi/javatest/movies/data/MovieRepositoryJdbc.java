@@ -17,7 +17,7 @@ public class MovieRepositoryJdbc implements MovieRepository {
 
     @Override
     public Movie findById(long id) {
-        return null;
+        return jdbcTemplate.queryForObject("select * from movies where id = ?", movieMapper, id);
     }
 
     @Override
@@ -28,12 +28,18 @@ public class MovieRepositoryJdbc implements MovieRepository {
 
     @Override
     public void saveOrUpdate(Movie movie) {
-
+        if (movie.getId() == null) {
+            jdbcTemplate.update("insert into movies (name, minutes, gender) values (?, ?, ?)",
+                    movie.getName(), movie.getMinutes(), movie.getGender().toString());
+        }
     }
 
-    private static RowMapper<Movie> movieMapper = (rs, rowNum) -> new Movie(
-            rs.getInt("id"),
-            rs.getString("name"),
-            rs.getInt("minutes"),
-            Gender.valueOf(rs.getString("gender")));
+    private static RowMapper<Movie> movieMapper = (rs, rowNum) ->
+            new Movie(
+                    rs.getInt("id"),
+                    rs.getString("name"),
+                    rs.getInt("minutes"),
+                    // Convertir String a Enum
+                    Gender.valueOf(rs.getString("gender"))
+            );
 }
