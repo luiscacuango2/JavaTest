@@ -7,16 +7,18 @@ public class Movie {
     private String name;
     private int minutes;
     private Gender gender;
+    private String director; // Nuevo atributo
 
-    public Movie(String name, int minutes, Gender gender) {
-        this(null, name, minutes, gender);
+    public Movie(String name, int minutes, Gender gender, String director) {
+        this(null, name, minutes, gender, director);
     }
 
-    public Movie(Integer id, String name, int minutes, Gender gender) {
+    public Movie(Integer id, String name, int minutes, Gender gender, String director) {
         this.id = id;
         this.name = name;
         this.minutes = minutes;
         this.gender = gender;
+        this.director = director;
     }
 
     public Integer getId() {
@@ -34,6 +36,8 @@ public class Movie {
     public Gender getGender() {
         return gender;
     }
+
+    public String getDirector() { return director; }
 
     @Override
     public boolean equals(Object o) {

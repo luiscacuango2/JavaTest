@@ -22,15 +22,19 @@ public class MovieRepositoryJdbc implements MovieRepository {
 
     @Override
     public Collection<Movie> findAll() {
-
         return jdbcTemplate.query("select * from movies", movieMapper);
     }
 
     @Override
     public void saveOrUpdate(Movie movie) {
         if (movie.getId() == null) {
-            jdbcTemplate.update("insert into movies (name, minutes, gender) values (?, ?, ?)",
-                    movie.getName(), movie.getMinutes(), movie.getGender().toString());
+            // Actualizamos el INSERT para incluir el director
+            jdbcTemplate.update("insert into movies (name, minutes, gender, director) values (?, ?, ?, ?)",
+                    movie.getName(), movie.getMinutes(), movie.getGender().toString(), movie.getDirector());
+        } else {
+            // Implementamos el UPDATE (opcional pero recomendado)
+            jdbcTemplate.update("update movies set name = ?, minutes = ?, gender = ?, director = ? where id = ?",
+                    movie.getName(), movie.getMinutes(), movie.getGender().toString(), movie.getDirector(), movie.getId());
         }
     }
 
@@ -39,7 +43,8 @@ public class MovieRepositoryJdbc implements MovieRepository {
                     rs.getInt("id"),
                     rs.getString("name"),
                     rs.getInt("minutes"),
-                    // Convertir String a Enum
-                    Gender.valueOf(rs.getString("gender"))
+                    Gender.valueOf(rs.getString("gender")),
+                    // Obtenemos el director de la base de datos
+                    rs.getString("director")
             );
 }

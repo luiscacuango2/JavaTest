@@ -66,7 +66,7 @@ public class MovieRepositoryIntegrationTest {
     @Test
     public void insert_a_movie() {
         // Preparar
-        Movie movie = new Movie(null, "Super 8", 112, Gender.THRILLER);
+        Movie movie = new Movie(null, "Super 8", 112, Gender.THRILLER, "J.J. Abrams");
 
         // Ejecutar
         movieRepository.saveOrUpdate(movie);

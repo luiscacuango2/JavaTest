@@ -24,4 +24,16 @@ public class MovieService {
         return movieRepository.findAll().stream()
                 .filter(movie -> movie.getMinutes() <= length).collect(Collectors.toList());
     }
+
+    public Collection<Movie> findMoviesByName(String name) {
+        return movieRepository.findAll().stream()
+                .filter(movie -> movie.getName().toLowerCase().contains(name.toLowerCase()))
+                .collect(Collectors.toList());
+    }
+
+    public Collection<Movie> findMoviesByDirector(String director) {
+        return movieRepository.findAll().stream()
+                .filter(movie -> movie.getDirector().toLowerCase().contains(director.toLowerCase()))
+                .collect(Collectors.toList());
+    }
 }

@@ -28,13 +28,13 @@ public class MovieServiceShould {
         // GIVEN
         Mockito.when(movieRepository.findAll()).thenReturn(
                 Arrays.asList(
-                        new Movie(1, "Dark Knight", 152, Gender.ACTION),
-                        new Movie(2, "Memento", 113, Gender.THRILLER),
-                        new Movie(3, "Matrix", 120, Gender.COMEDY),
-                        new Movie(4, "Super 8", 112, Gender.THRILLER),
-                        new Movie(5, "Scream", 111, Gender.HORROR),
-                        new Movie(6, "Home Alone", 103, Gender.COMEDY),
-                        new Movie(7, "Matrix", 136, Gender.ACTION)
+                        new Movie(1, "Dark Knight", 152, Gender.ACTION, "Christopher Nolan"),
+                        new Movie(2, "Memento", 113, Gender.THRILLER, "Christopher Nolan"),
+                        new Movie(3, "Super 8", 112, Gender.THRILLER, "J.J. Abrams"),
+                        new Movie(4, "Superman", 103, Gender.ACTION, "Richard Donner"),
+                        new Movie(5, "Home Alone", 103, Gender.COMEDY, "Chris Columbus"),
+                        new Movie(6, "Home Alone", 120, Gender.COMEDY, "director1"),
+                        new Movie(7, "Matrix", 136, Gender.ACTION, "director2")
                 )
         );
     }
@@ -46,7 +46,7 @@ public class MovieServiceShould {
         // THEN
         // Cambiamos assertThat por assertEquals de JUnit 5
         // El orden es: assertEquals(esperado, actual)
-        assertEquals(Arrays.asList(3, 6), getMoviesIds(movies));
+        assertEquals(Arrays.asList(5, 6), getMoviesIds(movies));
     }
 
     @Test
@@ -61,5 +61,22 @@ public class MovieServiceShould {
         return movies.stream()
                 .map(Movie::getId)
                 .collect(Collectors.toList());
+    }
+    @Test
+    void return_movies_by_name() {
+        // Buscamos "super" (en minúsculas) para probar case-insensitivity
+        Collection<Movie> movies = movieService.findMoviesByName("super");
+
+        List<Integer> ids = movies.stream().map(Movie::getId).collect(Collectors.toList());
+        assertEquals(Arrays.asList(3, 4), ids); // Super 8 y Superman
+    }
+
+    @Test
+    void return_movies_by_director() {
+        // Buscamos una parte del nombre "Nolan"
+        Collection<Movie> movies = movieService.findMoviesByDirector("nolan");
+
+        List<Integer> ids = movies.stream().map(Movie::getId).collect(Collectors.toList());
+        assertEquals(Arrays.asList(1, 2), ids); // Dark Knight y Memento
     }
 }
