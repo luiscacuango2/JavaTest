@@ -5,7 +5,7 @@ import java.util.Objects;
 public class Movie {
     private Integer id;
     private String name;
-    private int minutes;
+    private Integer minutes;
     private Gender gender;
     private String director; // Nuevo atributo
 
@@ -13,7 +13,7 @@ public class Movie {
         this(null, name, minutes, gender, director);
     }
 
-    public Movie(Integer id, String name, int minutes, Gender gender, String director) {
+    public Movie(Integer id, String name, Integer minutes, Gender gender, String director) {
         this.id = id;
         this.name = name;
         this.minutes = minutes;
@@ -29,7 +29,7 @@ public class Movie {
         return name;
     }
 
-    public int getMinutes() {
+    public Integer getMinutes() {
         return minutes;
     }
 

@@ -30,11 +30,11 @@ public class MovieServiceShould {
                 Arrays.asList(
                         new Movie(1, "Dark Knight", 152, Gender.ACTION, "Christopher Nolan"),
                         new Movie(2, "Memento", 113, Gender.THRILLER, "Christopher Nolan"),
-                        new Movie(3, "Super 8", 112, Gender.THRILLER, "J.J. Abrams"),
-                        new Movie(4, "Superman", 103, Gender.ACTION, "Richard Donner"),
+                        new Movie(3, "Super 8", 112, Gender.DRAMA, "J.J. Abrams"),
+                        new Movie(4, "Superman", 173, Gender.ACTION, "Richard Donner"),
                         new Movie(5, "Home Alone", 103, Gender.COMEDY, "Chris Columbus"),
                         new Movie(6, "Home Alone", 120, Gender.COMEDY, "director1"),
-                        new Movie(7, "Matrix", 136, Gender.ACTION, "director2")
+                        new Movie(7, "Matrix", 166, Gender.ACTION, "director2")
                 )
         );
     }
@@ -54,7 +54,7 @@ public class MovieServiceShould {
         // WHEN
         Collection<Movie> movies = movieService.findMoviesByLength(120);
         // THEN
-        assertEquals(Arrays.asList(2, 3, 4, 5, 6), getMoviesIds(movies));
+        assertEquals(Arrays.asList(2, 3, 5, 6), getMoviesIds(movies));
     }
 
     public static List<Integer> getMoviesIds(Collection<Movie> movies) {
@@ -78,5 +78,42 @@ public class MovieServiceShould {
 
         List<Integer> ids = movies.stream().map(Movie::getId).collect(Collectors.toList());
         assertEquals(Arrays.asList(1, 2), ids); // Dark Knight y Memento
+    }
+    @Test
+    void find_movies_by_genre_and_max_duration() {
+        // Buscar peliculas de ACCION de menos de 160 min (Debería salir Superman)
+        Movie template = new Movie(null, null, 160, Gender.ACTION, null);
+        Collection<Movie> movies = movieService.findMoviesByTemplate(template);
+
+        assertEquals(1, movies.size());
+        assertTrue(movies.stream().allMatch(m -> m.getName().equals("Dark Knight")));
+    }
+
+    @Test
+    void find_movies_by_name_and_director() {
+        // Buscar "Super" del director "Abrams"
+        Movie template = new Movie(null, "Super", null, null, "Abrams");
+        Collection<Movie> movies = movieService.findMoviesByTemplate(template);
+
+        assertEquals(1, movies.size());
+    }
+
+    @Test
+    void throw_exception_when_minutes_are_negative() {
+        Movie template = new Movie(null, null, -10, null, null);
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            movieService.findMoviesByTemplate(template);
+        });
+    }
+
+    @Test
+    void ignore_other_filters_if_id_is_present() {
+        // Aunque pida comedia, si el ID 1 es Acción, debe devolver el 1 (Acción)
+        Movie template = new Movie(1, "Inexistente", 10, Gender.ACTION, "Nadie");
+        Collection<Movie> movies = movieService.findMoviesByTemplate(template);
+
+        assertEquals(1, movies.size());
+        assertEquals("Dark Knight", movies.iterator().next().getName());
     }
 }

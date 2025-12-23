@@ -36,4 +36,25 @@ public class MovieService {
                 .filter(movie -> movie.getDirector().toLowerCase().contains(director.toLowerCase()))
                 .collect(Collectors.toList());
     }
+
+    public Collection<Movie> findMoviesByTemplate(Movie template) {
+        // Regla: Si hay ID, ignoramos lo demás
+        if (template.getId() != null) {
+            return movieRepository.findAll().stream()
+                    .filter(m -> m.getId().equals(template.getId()))
+                    .collect(Collectors.toList());
+        }
+
+        // Regla: Minutos negativos lanzan excepción
+        if (template.getMinutes() != null && template.getMinutes() < 0) {
+            throw new IllegalArgumentException("Los minutos no pueden ser negativos");
+        }
+
+        return movieRepository.findAll().stream()
+                .filter(m -> template.getName() == null || m.getName().toLowerCase().contains(template.getName().toLowerCase().trim()))
+                .filter(m -> template.getMinutes() == null || m.getMinutes() <= template.getMinutes())
+                .filter(m -> template.getGender() == null || m.getGender().equals(template.getGender()))
+                .filter(m -> template.getDirector() == null || m.getDirector().toLowerCase().contains(template.getDirector().toLowerCase().trim()))
+                .collect(Collectors.toList());
+    }
 }
