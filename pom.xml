@@ -13,6 +13,10 @@
         <maven.compiler.target>25</maven.compiler.target>
     </properties>
 
+    <prerequisites>
+        <maven>3.2.5</maven>
+    </prerequisites>
+
     <dependencies>
 
         <dependency>
@@ -53,6 +57,10 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
+                    <includes>
+                        <include>**/*Test.java</include>
+                        <include>**/*Should.java</include>
+                    </includes>
                     <argLine>
                         -XX:+EnableDynamicAgentLoading
                         -Xshare:off

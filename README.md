@@ -7,6 +7,9 @@
 ![Mockito](https://img.shields.io/badge/Mockito-5.20.0-6bba46?style=for-the-badge&logo=mockito&logoColor=white)
 ![H2](https://img.shields.io/badge/H2_Database-004B8D?style=for-the-badge&logo=sqlite&logoColor=white)
 ![Spring](https://img.shields.io/badge/Spring_JDBC-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
+![Tests](https://img.shields.io/badge/Tests-100%25%20Passed-brightgreen?style=for-the-badge&logo=checkmarx&logoColor=white)
+![Build Status](https://img.shields.io/github/actions/workflow/status/luiscacuango2/javatest/maven.yml?style=for-the-badge&logo=github&label=CI%20Build)
+
 ## **Descripción**
 Este repositorio es un ecosistema de aprendizaje y desarrollo en Java. Contiene implementaciones de algoritmos clásicos, gestión de lógica de negocio y pruebas de integración, sirviendo como base sólida para despliegue de componentes escalables.
 

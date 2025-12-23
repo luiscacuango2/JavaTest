@@ -1,10 +1,10 @@
-name: Java CI with Maven
+name: Java CI with Maven (JDK 25)
 
 on:
   push:
-    branches: [ "main", "develop" ]
+    branches: [ "main", "master" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "master" ]
 
 jobs:
   build:
@@ -17,12 +17,13 @@ jobs:
         uses: actions/setup-java@v4
         with:
           java-version: '25'
-          distribution: 'oracle'
+          distribution: 'temurin' # Adoptium es el más fiable para versiones nuevas
           cache: maven
 
       - name: Build and Test with Maven
-        # Añadimos el flag para permitir la carga de agentes en Java 25
-        run: mvn -B clean package -DargLine="-XX:+EnableDynamicAgentLoading -Xshare:off"
+        # Usamos 'verify' para asegurar que corran Unit + Integration tests
+        # Agregamos los flags necesarios para Mockito en Java 25
+        run: mvn -B clean verify -DargLine="-XX:+EnableDynamicAgentLoading -Xshare:off"
 
       - name: Upload Build Artifact
         uses: actions/upload-artifact@v4
