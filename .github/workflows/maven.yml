@@ -5,7 +5,13 @@ on:
     branches: [ "main", "master" ]
   pull_request:
     branches: [ "main", "master" ]
-
+# --- Bloque de permisos ---
+permissions:
+  contents: read
+  issues: write
+  checks: write
+  pull-requests: write
+# ----------------------------
 jobs:
   build:
     runs-on: ubuntu-latest
